@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arbortary</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header class="d-flex justify-content-between mx-5">
+      <div class="welcome">
+        <h1>Arbortary</h1>
+        <h4>A site to track randomly planted Trees!</h4>
+      </div>
+      <div class="user-dash">
+        <a href="/arbortary/account" class="nav-link d-inline-block"
+          >My trees
+        </a>
+        <h3 class="d-inline-block">Welcome, {{user.first_name}}!</h3>
+
+        <div class="btns d-flex justify-content-lg-center">
+          <a href="/arbortary/plant_tree">
+            <button class="btn-success">Plant A tree</button>
+          </a>
+          <a href="/arbortary/logout">
+            <button class="btn-danger">Logout</button>
+          </a>
+        </div>
+      </div>
+    </header>
+    <h1 class="text text-center">
+      {{tree.spiecie}} Planted By {{tree.planted_by.first_name}}
+    </h1>
+    <main class="container">
+      <div class="">
+        <h3>Where: {{tree.location}}</h3>
+        <h3>When: {{tree.date_planted}}</h3>
+        <h3>Why: {{tree.reason}}</h3>
+      </div>
+      <div class="visited_by">
+        <h2>Visited By:</h2>
+        <div class="container">
+          <div class="border p2 col-3">
+            <ul class="list-unstyled">
+              {% for visitor in tree.visited_by.all %}
+              <li class="text text-success">
+                {{visitor.first_name}} {{visitor.last_name}}
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+
+        <a href="/arbortary/add_to_visited/{{tree.id}}">
+          Did you visit this tree?
+        </a>
+      </div>
+    </main>
+  </body>
+</html>
